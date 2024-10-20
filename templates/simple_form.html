@@ -1,0 +1,6 @@
+<!-- Modello per form -->
+<form action="/kidney_robotic/insert_new" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
