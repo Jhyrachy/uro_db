@@ -60,26 +60,26 @@ def patient_search(request):
 # Edit data using a primary key
 def edit_data(request, pk):
     # Recupera l'oggetto usando la PK passata dal form di ricerca
-    instance = get_object_or_404(Patient, pk=pk)
-
-    persona = instance.objects.get(anagraphicName=pk)
+    print(pk)
+    persona = get_object_or_404(Patient, pk=pk)
 
     if request.method == "POST":
-        form = PatientSearchForm(request.POST, instance=instance)
+        form = Intraoperative(request.POST, instance=persona)
         if form.is_valid():
             form.save()  # Salva le modifiche
             return redirect("success_url")  # Reindirizza a una pagina di successo
     else:
-        form = PatientSearchForm(instance=instance)
+        form = Intraoperative(instance=persona)
 
     return render(
         request,
-        "edit_data.html",
+        "edit_page.html",
         {
             "form": form,
             "page_title": "Intraoperative data",
             "name": persona.anagraphicName,
             "surname": persona.anagraphicSurname,
             "birthdate": persona.anagraphicBirthdate,
+            "id": persona.pk,
         },
     )

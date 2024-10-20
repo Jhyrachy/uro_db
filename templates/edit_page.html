@@ -15,7 +15,7 @@
         <h2>{{ surname }}, {{ name }}, {{ birthdate }}</h2>
 
         <div class="container">
-            <form action="/kidney_robotic/edit_page.html" method="post">
+            <form action="/kidney_robotic/edit_data/{{ id }}/" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Submit">
