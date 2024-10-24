@@ -24,11 +24,16 @@ SURGEON = [
 
 
 # Create your models here.
-class Patient(models.Model):
+class Robotics_Kidneys(models.Model):
     class Meta:
+        #Controllo sull'unicità del paziente
         constraints = [
             models.UniqueConstraint(
-                fields=["anagraphicSurname", "anagraphicName", "anagraphicBirthdate"],
+                fields=[
+                    "anagraphicSurname",
+                    "anagraphicName",
+                    "anagraphicBirthdate",
+                ],
                 name="unique_patient",
             )
         ]

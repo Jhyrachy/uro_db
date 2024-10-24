@@ -1,34 +1,31 @@
 from django.forms import ModelForm, DateInput
-from .models import Patient, PatientSearchAnagraphic
+from .models import Robotics_Kidneys, PatientSearchAnagraphic
 
-
-# Classe per abilitare l'input del tipo data
-class DateInput(DateInput):
-    input_type = "date"
+# Libreria datepicker bootstrap 5
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 
 # Classe per la creazione del form
 class Anagraphic(ModelForm):
     class Meta:
-        model = Patient
+        model = Robotics_Kidneys
         fields = [
             "anagraphicSurname",
             "anagraphicName",
             "anagraphicBirthdate",
             "anagraphicGender",
         ]
-        widgets = {
-            "anagraphicBirthdate": DateInput(),
-        }
+        widgets = {"anagraphicBirthdate": DateInput(attrs={"type": "date"})}
 
 
 class Intraoperative(ModelForm):
     class Meta:
-        model = Patient
+        model = Robotics_Kidneys
         fields = ["intraoperativaSide", "intraoperativaDate", "intraoperativaSurgeon"]
 
+        # widgets = {"intraoperativaDate": DateInput(attrs={"type": "date"})}
         widgets = {
-            "intraoperativaDate": DateInput(),
+            "intraoperativaDate": DatePickerInput(options={"format": "DD/MM/YYYY"})
         }
 
 
@@ -37,6 +34,4 @@ class PatientSearchForm(ModelForm):
     class Meta:
         model = PatientSearchAnagraphic
         fields = "__all__"
-        widgets = {
-            "birthdate": DateInput(),
-        }
+        widgets = {"birthdate": DateInput(attrs={"type": "date"})}
